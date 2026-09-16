@@ -1,0 +1,84 @@
+<!DOCTYPE html> 
+    <html lang ="en">
+    <head> <!-- Provides browser info about webpage -->
+        <meta charset="UTF-8"> <!-- Tells browser how to correctly display the text on the webpage-->
+        <title>The Laughing Ladle - Reservations</title>
+    </head>
+
+    <body>
+
+
+        <!-- Header -->
+        <header>
+            <img src="banner.jpg" alt="restaurant name banner">
+            <!-- Navigation Links -->
+            <a href="index.html">Home</a>
+            <a href="menu.html">Menu</a>
+            <a href="locations.html">Locations</a>
+            <a href="reservations.html">Reservations</a>
+        </header>
+
+        <h1>Make a Reservation</h1>
+
+        <form>
+             
+
+            <label for="location">Location:</label>
+            <select id="location" required>
+                <option value="">Choose an Option</option>
+                <option value="ottawa">Ottawa - Downtown</option>
+                <option value="toronto-downtown">Toronto - Downtown</option>
+                <option value="toronto-harbourfront">Toronto - Harbourfront</option>
+                <option value="montreal-plateau">Montreal - Plateau</option>                
+                <option value="montreal-plateau">Montreal - Plateau</option>
+                <option value="montreal-old-port">Montreal - Old Port</option>
+                <option value="gatineau-aylmer">Gatineau - Aylmer</option>
+                
+            </select><br><br>
+
+            <label for="name"> Name: </label>
+            <input type="text" id = "name" required><br><br>
+
+            <label for="phone"> Phone: </label>
+            <input type="tel" pattern= "1? ?\([0-9]{3}\) ?[0-9]{3}-[0-9]{4}"
+             placeholder= "1 (xxx) xxx-xxxx" id = "phone" required><br><br>
+
+            <label for="date"> Date: </label>
+            <input type="date" id = "date" required><br><br>
+
+            <label for="time"> Time: </label>
+            <input type="time" id = "time" required><br><br>
+
+            <label for="guests"> Number of Guests: </label>
+            <input type="number" id = "guests" min="1" max="30" value = "2" required><br><br>
+
+             <input type="checkbox" id="agreement" required>
+             <label for="agreement">I acknowledge and agree that reservations are held for
+                15 minutes past the scheduled time. Failure to arrive within this time may
+                result in cancellation of the reservation.</label><br><br>
+
+            <input type="button" value = "Book Reservation">
+        </form>
+
+        <footer>
+            <hr>
+            <p>&copy; 2026 The Laughing Ladle</p>
+            <a href="contact.html">Contact Us</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </footer>
+
+    </body>
+
+
+</html>
+
+
+
+
+
+    <!-- 
+    - There are elements and child elements. 
+    - There are 6 levels to heading tags <h#> biggest 1, smallest 6
+    - Use ul for unordered items (point form) and the li with the amount of items 
+    -->
