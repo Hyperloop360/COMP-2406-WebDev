@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset="UTF-8">
+        <title> Paws & Claws - Application</title>
+    </head>
+
+    <body>
+         <!-- Header -->
+        <header>
+            <img src="images/banner.jpg" alt="center name banner">
+            <!-- Navigation links-->
+            <a href="index.html">Home</a>
+            <a href="browse.html">Browse Pets</a>
+            <a href="about.html"> About Us</a>
+        </header>
+
+        <form>
+            <div>
+                <img src = "images/dog1.jpg" alt = "Milo">
+                <h1>Name: Milo</h1>
+                <p>3 year old Beagle Mix (Dog)</p>
+                <p>Adoption Fee: $180</p>
+                <p>Processing Fee: $40</p>
+                <p>Total: $220</p>
+            </div>
+        
+            <h2>Your Information:</h2>
+            <label for="fName"> Full Name: </label>
+            <input type="text" id = "name" required><br><br>
+
+            <label for="email"> Email: </label>
+            <input type="email" id = "email" required><br><br>
+
+            <label for="phone"> Phone Number: </label>
+            <input type="tel" pattern= "1? ?\([0-9]{3}\) ?[0-9]{3}-[0-9]{4}"
+             placeholder= "1 (xxx) xxx-xxxx" id = "phone" required><br><br>
+
+            <label for="address"> Home Address: </label>
+            <input type="text" id = "address" required><br><br>
+
+            <label for="resNum"> Number of Residence in the Home: </label>
+            <input type="number" id = "resNum" required><br><br>
+
+            <h3>Current Pets in Your Home: </h3>
+            <input type="text" id = "ownedPets" value="List other pets that you have (species, age, health)">
+            <br><br>
+            <h3>Pet Experience: </h3>
+            <p>Do you have experience with this kind of pet?</p>
+            <select id="pastExp">
+                <option value="None">None</option>
+                <option value="Some">Some</option>
+                <option value="Extensive">Extensive</option>
+            </select>
+            <p>Where will this pet primarily live?</p>
+              <select id="liveArea">
+                <option value="Indoor">Indoor</option>
+                <option value="Outdoor">Outdoor</option>
+                <option value="Both">Both</option>
+            </select>
+            <br><br>
+            <h2>Support Us</h2>
+            <select id="support">
+                <option value="0" >$0</option>
+                <option value="10">$10</option>
+                <option value="25">$25</option>
+                <option value="50">$50</option>
+            </select>
+            <br><br>
+            <input type="checkbox" id="careAgg" required>
+            <label for="careAgg">I agree to provide proper care, food, shelter and medical attention for the pet.</label>
+            <br>
+            <input type="checkbox" id="guarAgg" required>
+            <label for="guarAgg">I understand that the application does not guarantee adoption</label>
+            <br><br>
+            <input type="button" value = "Submit Application">
+        </form>
+
+
+
+
+        <footer>
+        <hr>
+        <p>&copy; 2026 Paws & Claws | Open Your Heart, Change a Life</p>
+        </footer>
+    </body>
+</html>
