@@ -1,0 +1,67 @@
+ /* Default styling for the whole page */
+
+ body {
+    background-color: beige;      /* page background */
+    color: #604020;               /* default text color */
+    font-family: 'Arial', serif;  /* default font for text */
+    text-align: center;           /* center all text and images */
+    margin: 0;
+
+
+ }
+
+  
+
+ header {
+    background-color: #48220F;  /* background color */
+ }
+
+ header a {
+    color: #3E1D0A;          /* default text color */
+    font-weight: bold;       /* make the text bold */
+    font-style: italic;      /* make the text italic */
+    font-size: 16pt;         /* set the text to 16pt size */
+    text-decoration: none;   /* remove default underlining applied to links */
+
+    margin: 15px 5px;        /* specifies vertical & horizontal margin */
+    display: inline-block;   /* allows vertical margins to work */
+
+    border: 1px solid #805231;  /* border color */
+    border-radius: 10px;        /* makes corners rounded */
+    background-color: #A46B3E;  /* background color */
+    padding: 8px 15px;          /* vertical and horizontal spacing from border */
+ }
+
+ 
+ img {
+    height: 300px;
+ }
+
+ header img {
+    width: 100%;
+    height: auto;
+ }
+
+ header a:hover {
+    color: #FFFFFF;              /* White text on hover */
+    background-color: #905C2D;   /* Darker background on hover */
+ }
+
+
+ footer {
+    background-color: #48220F;   /* background color */
+    color: white;                /* white text */
+ }
+
+ footer a {
+    color: #A46B3E;              /* lighter link text */
+    text-decoration: none;       /* remove default underlining applied to links */
+    margin: 0px 15px 15px 15px;  /* top, right, bottom, left margins */
+    display: inline-block;       /* allows vertical margins to work */
+ }
+
+ 
+
+ 
+
+

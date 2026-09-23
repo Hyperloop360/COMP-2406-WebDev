@@ -1,0 +1,13 @@
+ a {
+    color: white;               /* white text */
+    display: inline-block;      /* allows vertical margins to work */
+    border-radius: 10px;        /* makes corners rounded */
+    background-color: #604020;  /* background color */
+    padding: 8px 15px;          /* vertical and horizontal spacing from border */
+    text-decoration: none;      /* remove default underlining applied to links */
+ }
+
+ a:hover {
+    color: #FFFFFF;              /* white text on hover */
+    background-color: #905C2D;   /* darker background on hover */
+ }
