@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <title>The Laughing Ladle – Reservations</title>
         <link rel="stylesheet" href="styles/style.css">
+        <link rel="stylesheet" href="styles/reservations.css">
     </head>
     <body>
         <!-- Header -->
@@ -20,36 +21,41 @@
         <p>Please select a restaurant location and complete the form below to reserve your table.</p>
 
         <form>
-            <label for="location">Location:</label>
-            <select id="location" required>
-                <option value="">-- Choose an Option --</option>
-                <option>Ottawa – Downtown</option>
-                <option>Toronto – Downtown</option>
-                <option>Toronto – Harbourfront</option>
-                <option>Montreal – Plateau</option>
-                <option>Montreal – Old Port</option>
-                <option>Gatineau – Aylmer</option>
-            </select><br><br>
+            <div class="location-row">
+                <label for="location">Location:</label>
+                <select id="location" required>
+                    <option value="">-- Choose an Option --</option>
+                    <option>Ottawa – Downtown</option>
+                    <option>Toronto – Downtown</option>
+                    <option>Toronto – Harbourfront</option>
+                    <option>Montreal – Plateau</option>
+                    <option>Montreal – Old Port</option>
+                    <option>Gatineau – Aylmer</option>
+                </select>
+            </div>
 
             <label for="name">Name:</label>
-            <input type="text" id="name" required><br><br>
+            <input type="text" id="name" required>
 
             <label for="phone">Phone:</label>
-            <input type="tel" id="phone" pattern="1? ?\([0-9]{3}\) ?[0-9]{3}-[0-9]{4}" placeholder="1 (xxx) xxx-xxxx" required><br><br>
+            <input type="tel" id="phone" pattern="1? ?\([0-9]{3}\) ?[0-9]{3}-[0-9]{4}" placeholder="1 (xxx) xxx-xxxx" required>
 
             <label for="date">Date:</label>
-            <input type="date" id="date" required><br><br>
+            <input type="date" id="date" required>
 
             <label for="time">Time:</label>
-            <input type="time" id="time" required><br><br>
+            <input type="time" id="time" required>
 
             <label for="guests">Number of Guests:</label>
-            <input type="number" id="guests" min="1" max="30" value="2" required><br><br>
+            <input type="number" id="guests" min="1" max="30" value="2" required>
 
-            <input type="checkbox" id="agreement" required>
-            <label for="agreement">I acknowledge and agree that reservations are held for 
-                15 minutes past the scheduled time. Failure to arrive within this time may 
-                result in cancellation of the reservation.</label><br><br>
+
+            <div id="checkbox-row">
+                <input type="checkbox" id="agreement" required>
+                <label for="agreement">I acknowledge and agree that reservations are held for
+                    15 minutes past the scheduled time. Failure to arrive within this time may
+                    result in cancellation of the reservation.</label>
+            </div>
 
             <input type="submit" value="Book Reservation">
         </form>        

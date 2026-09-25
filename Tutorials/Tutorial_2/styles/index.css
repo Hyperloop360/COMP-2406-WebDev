@@ -1,13 +1,53 @@
- a {
-    color: white;               /* white text */
-    display: inline-block;      /* allows vertical margins to work */
-    border-radius: 10px;        /* makes corners rounded */
-    background-color: #604020;  /* background color */
-    padding: 8px 15px;          /* vertical and horizontal spacing from border */
-    text-decoration: none;      /* remove default underlining applied to links */
- }
+a {
+   color: white;               /* white text */
+   display: inline-block;      /* allows vertical margins to work */
+   border-radius: 10px;        /* makes corners rounded */
+   background-color: #604020;  /* background color */
+   padding: 8px 15px;          /* vertical and horizontal spacing from border */
+   text-decoration: none;      /* remove default underlining applied to links */
+}
 
- a:hover {
-    color: #FFFFFF;              /* white text on hover */
-    background-color: #905C2D;   /* darker background on hover */
- }
+a:hover {
+   color: #FFFFFF;              /* white text on hover */
+   background-color: #905C2D;   /* darker background on hover */
+}
+
+#restaurant-img {
+   border-radius: 200px;        /* rounds image corners a lot */
+   border: 10px solid #604020;  /* thick brown border */
+}
+
+div {
+   background-color: #f3deb8; /* different background color */
+   border: 2px dashed #3e1d0a; /* dashed border */
+   border-radius: 15px;       /*rounded corner */
+}
+
+div img{
+   width: 120px;
+   height: 120px;
+   border: 2px solid #3e1d0a;
+   border-radius: 10px;
+}
+
+.promo {
+   background-color: #F3DEB8;   /* different background color */
+   border: 2px dashed #3E1D0A;  /* dashed border */
+   border-radius: 15px;         /* rounded corners */
+   display: flex;                /* use flexible side-by-side layout */
+   margin: auto;
+   padding: 15px;
+}
+
+.promo img {
+   width: 150px;
+   height: 120px;
+   border: 2px solid #3E1D0A;
+   border-radius: 15px;
+}
+
+.promo-text{
+   text-align: left; /* Alight text on the left */
+   font-weight: bold; /* make it bold */
+   margin-left: 15px;
+} 

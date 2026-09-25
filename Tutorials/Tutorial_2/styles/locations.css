@@ -1,0 +1,44 @@
+table {
+    width: 90%;
+    margin: 30px auto;
+    border-collapse: seperate;
+    border-spacing: 20px 10px;
+    table-layout: fixed;
+}
+
+td {
+    border: solid 2px;
+    padding: 20px;
+    background-color: #F3DEB8;
+    border-radius: 12px;
+    vertical-align: top;
+    box-shadow: 3px 3px 10px rgba(0,0,0,0.4);
+    width: 170px;    
+    transition: 0.2s;
+
+}
+
+td h2 {
+    margin-top: 0;
+    color: #48220F;
+    border-bottom: 2px solid #A46B3E;
+    padding-bottom: 5px;
+}
+
+td p{
+    margin: 0 0 0 0  ;
+    line-height: 1.5;
+}
+
+td:hover {
+    transform: scale(1.03);
+}
+
+
+
+
+
+
+
+
+
