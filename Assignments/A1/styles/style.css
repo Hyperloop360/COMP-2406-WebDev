@@ -1,0 +1,66 @@
+/* Paws & Claws - shared stylesheet for all pages */
+:root { --main: #2a7f78; --dark: #1d5a55; --light: #e3f2f0; --accent: #f08a3c; }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; font-family: Arial, Helvetica, sans-serif; background: #f6f9f9; color: #333; line-height: 1.5; }
+main { max-width: 1000px; margin: 0 auto; padding: 20px; text-align: center; }
+h1, h2, h3 { color: var(--dark); }
+
+/* Header & navigation */
+header img { width: 100%; max-height: 280px; object-fit: cover; display: block; }
+nav { display: flex; justify-content: center; gap: 8px; background: var(--main); padding: 8px; }
+nav a { color: white; text-decoration: none; padding: 8px 20px; border-radius: 6px; }
+nav a:not(.active):hover { background: var(--dark); }
+nav a.active { background: var(--accent); font-weight: bold; }
+
+/* Footer */
+footer { text-align: center; color: #666; padding: 10px; }
+
+/* Images */
+main > img, img.wide { max-width: 100%; width: 700px; border-radius: 10px; margin: 10px 0; }
+
+/* Cards (index text, team, pet details, thank-you) */
+.card, main > div, main > table td { background: white; border-radius: 10px; padding: 20px; margin: 15px 0; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
+main > div:has(#petInfo), #petInfo { box-shadow: none; padding: 0; }
+table { width: 100%; border-spacing: 12px; }
+main > table td { text-align: center; font-weight: bold; color: var(--dark); background: var(--light); }
+ul { display: inline-block; text-align: left; }
+li { margin: 8px 0; }
+
+/* About: team grid adjusts to any number of members */
+#team { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; text-align: left; }
+#team .card { margin: 0; }
+
+/* Buttons & select */
+button { font-size: 1rem; padding: 8px 16px; border: none; border-radius: 6px; background: var(--main); color: white; cursor: pointer; }
+button:hover:not(:disabled) { background: var(--dark); }
+button.primary { background: var(--accent); }
+button.primary:hover:not(:disabled) { background: #d4701f; }
+button:disabled { background: #bbb; color: #777; cursor: not-allowed; }
+select { font-size: 1rem; padding: 8px; border-radius: 6px; border: 1px solid #aaa; }
+
+/* Browse: pet-type buttons */
+#typeButtons { margin: 20px 0; display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; }
+#typeButtons button { background: var(--light); color: var(--dark); border: 1px solid var(--main); }
+#typeButtons button:hover:not(:disabled):not(.selected) { background: #b9dcd8; }
+#typeButtons button.selected { background: var(--dark); color: white; cursor: default; }
+#typeButtons button:disabled { background: #e5e5e5; color: #999; border-color: #ccc; }
+
+/* Browse: pet grid */
+#pets { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 15px; }
+.petCard { background: white; border-radius: 10px; padding: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: transform 0.2s, box-shadow 0.2s; }
+.petCard:hover { transform: translateY(-5px); box-shadow: 0 6px 14px rgba(0,0,0,0.3); }
+.petCard img { width: 120px; height: 120px; max-width: 100%; object-fit: cover; border-radius: 8px; }
+
+/* Pet details: image at least 3x larger (360px vs 120px) */
+.petDetails img { width: 360px; height: 360px; max-width: 100%; object-fit: cover; border-radius: 10px; }
+
+/* Apply: paper-like form */
+form { background: #fffef9; border: 2px solid #ccc; border-radius: 4px; padding: 30px; max-width: 700px; margin: 0 auto; text-align: left; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+form label { display: block; margin-top: 12px; font-weight: bold; }
+form input[type="text"], form input[type="email"], form input[type="tel"], form input[type="number"], form textarea, form select { width: 100%; padding: 8px; margin-top: 4px; border: none; border-bottom: 2px solid #999; background: transparent; font-size: 1rem; font-family: inherit; }
+form input:focus, form textarea:focus, form select:focus { outline: none; border-bottom-color: var(--accent); background: #fff8ee; }
+.check { display: flex; gap: 8px; align-items: flex-start; margin-top: 12px; }
+.check label { margin: 0; font-weight: normal; }
+form #submitBtn { margin-top: 20px; }
+#petInfo { background: var(--light); border-radius: 6px; padding: 15px; margin-bottom: 10px; text-align: center; }

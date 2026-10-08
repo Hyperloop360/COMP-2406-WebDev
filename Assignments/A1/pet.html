@@ -1,53 +1,30 @@
 <!DOCTYPE html>
-<html lang = "en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Paws & Claws - Pet Details</title>
-        <link rel="stylesheet" href="styles/style.css">
-    </head>
-     <body>
-        <!-- Header -->
-        <header>
-            <img src="images/banner.jpg" alt="center name banner">
-            <!-- Navigation links-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Paws & Claws - Pet Details</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <img src="images/banner.jpg" alt="center name banner">
+        <!-- Navigation links-->
+        <nav>
             <a href="index.html">Home</a>
-            <a href="browse.html">Browse Pets</a>
-            <a href="about.html"> About Us</a>
-        </header>
-        
-        <div>
-            <img src = "images/dog1.jpg" alt = "Milo">
-            <h1>Name: Milo</h1>
-            <p>3 year old Beagle Mix (Dog)</p>
-            <p>Vaccinated, Neutered</p>
-            <p>Friendly, Energetic, Good with Kids</p>
-            <p>45 Days at Shelter</p>
-            <br>
-            <p>Adoption Fee: $180</p>
-            <p>Processing Fee: $40</p>
-            <p>Total: $220</p>
-            <br>
-            <button onclick="window.location.href='apply.html';">Apply to Adopt this Pet</button>
-            <br><br>
-            <a href="browse.html"> <- Back to Browsing </a>
-        </div>
-
-
-
-
-
-
-        <footer>
+            <a href="browse.html" class="active">Browse Pets</a>
+            <a href="about.html">About Us</a>
+        </nav>
+    </header>
+    <main>
+        <div id="petDetails"></div>
+    </main>
+    <footer>
         <hr>
-        <p>&copy; 2026 Paws & Claws | Open Your Heart, Change a Life</p>
-        </footer>
-     </body>
-
-
-
-
-
-
-
-
+        <p>&copy; 2026 Paws &amp; Claws | Open Your Heart, Change a Life</p>
+    </footer>
+    <script src="js/shelterData.js"></script>
+    <script src="js/pet.js"></script>
+</body>
 </html>
