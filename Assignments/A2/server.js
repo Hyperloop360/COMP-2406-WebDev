@@ -1,13 +1,4 @@
-/*
- * New Home Animal Rescue - Assignment 2 server
- *
- * A plain node.js HTTP server (no external modules) that:
- *   - loads every shelter .json file from data/shelters/ BEFORE it starts listening
- *   - serves the site's HTML pages from clean URLs ("/", "/browse", ...)
- *   - serves static resources (styles, js, images)
- *   - provides JSON endpoints for shelters, pets and adoption applications
- *   - stores all submitted applications in RAM (lost when the server restarts)
- */
+// Paws & Claws - Assignment 2 server (no external modules)
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
@@ -15,24 +6,15 @@ const url = require('url');
 
 const PORT = 3000;
 const SHELTERS_DIR = path.join(__dirname, 'data', 'shelters');
-const MAX_BODY_BYTES = 1e6;   // refuse request bodies larger than ~1MB
-
-// The only values an application's status is allowed to have
+const MAX_BODY_BYTES = 1e6;
 const VALID_STATUSES = ['Unprocessed', 'Pending', 'Rejected', 'Approved'];
 
-// ---------------------------------------------------------------------------
-// In-memory state
-// ---------------------------------------------------------------------------
-let shelters = [];          // full shelter objects (including pets), loaded at start up
-let applications = [];      // all submitted applications, in order of submission
-let nextApplicationNumber = 1;   // used to build unique ids: a1, a2, a3, ...
+// All data lives in RAM
+let shelters = [];
+let applications = [];
+let nextApplicationNumber = 1;
 
-
-// ---------------------------------------------------------------------------
-// Routing tables
-// ---------------------------------------------------------------------------
-
-// Clean URL  ->  HTML file that is served for it
+// Clean URL -> HTML file
 const PAGE_ROUTES = {
     '/':             'index.html',
     '/browse':       'browse.html',
@@ -42,19 +24,14 @@ const PAGE_ROUTES = {
     '/about':        'about.html'
 };
 
-// Static files may ONLY come from these folders. This keeps server.js and the
-// raw shelter .json files from being downloaded as "static" files.
+// Static files are only served from these folders
 const STATIC_PREFIXES = ['/styles/', '/js/', '/images/'];
 
 
-// ---------------------------------------------------------------------------
-// Small helpers
-// ---------------------------------------------------------------------------
+// ---------- Helpers ----------
 
-// Return the Content-type based on the file type. This is needed for static file serving.
 function getMimeType(file) {
-    const ext = path.extname(file).toLowerCase();
-    switch(ext) {
+    switch (path.extname(file).toLowerCase()) {
         case '.js': return 'application/javascript';
         case '.css': return 'text/css';
         case '.jpg': return 'image/jpeg';
@@ -66,38 +43,29 @@ function getMimeType(file) {
     }
 }
 
-// Send a JSON response with the given status code
 function sendJSON(res, statusCode, data) {
     res.writeHead(statusCode, {'Content-Type': 'application/json'});
     res.end(JSON.stringify(data));
 }
 
-// Send a plain-text error (e.g., the "standard" 404)
 function sendError(res, statusCode, message) {
     res.writeHead(statusCode, {'Content-Type': 'text/plain'});
     res.end(message);
 }
 
-// This function serves all the static files
 function serveStatic(filePath, res) {
     fs.readFile(filePath, (err, data) => {
-        if (err) {
-            sendError(res, 404, 'File not found');
-        } else {
-            res.writeHead(200, {'Content-Type': getMimeType(filePath)});
-            res.end(data);
-        }
+        if (err) return sendError(res, 404, 'File not found');
+        res.writeHead(200, {'Content-Type': getMimeType(filePath)});
+        res.end(data);
     });
 }
 
-// Is this URL path one of the static resources we are willing to serve?
 function isAllowedStaticPath(pathname) {
-    if (pathname.includes('..')) return false;     // no directory-traversal tricks
-    return STATIC_PREFIXES.some(prefix => pathname.startsWith(prefix));
+    return !pathname.includes('..') && STATIC_PREFIXES.some(prefix => pathname.startsWith(prefix));
 }
 
-// Collect the body of a POST/PUT request and parse it as JSON.
-// Resolves with the parsed object, or rejects if it is too big or is not valid JSON.
+// Read a request body and parse it as JSON (rejects if too big or invalid)
 function readJSONBody(req) {
     return new Promise((resolve, reject) => {
         let body = '';
@@ -119,17 +87,11 @@ function readJSONBody(req) {
     });
 }
 
-// Convert any incoming value to a trimmed string ('' if it is missing)
 function toCleanString(value) {
     return (value === undefined || value === null) ? '' : String(value).trim();
 }
 
-
-// ---------------------------------------------------------------------------
-// Data look-ups
-// ---------------------------------------------------------------------------
-
-// The "basic" version of a shelter: everything EXCEPT the pets array
+// A shelter without its pets array
 function getBasicShelter(shelter) {
     return {
         id: shelter.id,
@@ -143,7 +105,6 @@ function findShelter(shelterId) {
     return shelters.find(s => s.id === shelterId);
 }
 
-// Find a pet within a specific shelter (undefined if either does not exist)
 function findPet(shelterId, petId) {
     const shelter = findShelter(shelterId);
     return shelter ? shelter.pets.find(p => p.id === petId) : undefined;
@@ -154,12 +115,9 @@ function findApplication(applicationId) {
 }
 
 
-// ---------------------------------------------------------------------------
-// Start-up: load shelters
-// ---------------------------------------------------------------------------
+// ---------- Start-up ----------
 
-// Read every .json file in data/shelters/ and parse it. Any new shelter file dropped into
-// that folder is picked up automatically - nothing in this code names a specific file.
+// Read every .json file in data/shelters/ (new shelter files are picked up automatically)
 async function loadShelters() {
     const files = (await fs.promises.readdir(SHELTERS_DIR))
         .filter(file => path.extname(file).toLowerCase() === '.json');
@@ -169,35 +127,29 @@ async function loadShelters() {
         return JSON.parse(text);
     }));
 
-    // Directory order is alphabetical by filename; sort by shelter id (s1, s2, ... s10) instead
     loaded.sort((a, b) => a.id.localeCompare(b.id, undefined, {numeric: true}));
     return loaded;
 }
 
 
-// ---------------------------------------------------------------------------
-// GET handlers
-// ---------------------------------------------------------------------------
+// ---------- GET handlers ----------
 
-// GET /shelters                -> array of basic shelters (no pets)
-// GET /shelters?id=s1          -> one full shelter (with pets), or 404
+// /shelters returns basic info; /shelters?id=s1 returns one full shelter
 function handleGetShelters(query, res) {
-    if (query.id === undefined) {
+    if (query.id === undefined)
         return sendJSON(res, 200, shelters.map(getBasicShelter));
-    }
+
     const shelter = findShelter(query.id);
     if (!shelter) return sendError(res, 404, 'Not Found');
     return sendJSON(res, 200, shelter);
 }
 
-// GET /shelters/pets?petId=p1&shelterId=s1  -> one pet, or 404
 function handleGetPet(query, res) {
     const pet = findPet(query.shelterId, query.petId);
     if (!pet) return sendError(res, 404, 'Not Found');
     return sendJSON(res, 200, pet);
 }
 
-// GET /applications-data -> summary of every application (not the applicant's personal details)
 function handleGetApplicationsData(res) {
     const summaries = applications.map(a => ({
         dateSubmitted: a.dateSubmitted,
@@ -210,7 +162,6 @@ function handleGetApplicationsData(res) {
     return sendJSON(res, 200, summaries);
 }
 
-// GET /applications-details?id=a4 -> the full application, or 404
 function handleGetApplicationDetails(query, res) {
     const application = findApplication(query.id);
     if (!application) return sendError(res, 404, 'Not Found');
@@ -218,12 +169,9 @@ function handleGetApplicationDetails(query, res) {
 }
 
 function handleGet(pathname, query, res) {
-    // HTML pages (clean URLs)
-    if (PAGE_ROUTES[pathname]) {
+    if (PAGE_ROUTES[pathname])
         return serveStatic(path.join(__dirname, PAGE_ROUTES[pathname]), res);
-    }
 
-    // JSON data routes
     switch (pathname) {
         case '/shelters':              return handleGetShelters(query, res);
         case '/shelters/pets':         return handleGetPet(query, res);
@@ -231,21 +179,16 @@ function handleGet(pathname, query, res) {
         case '/applications-details':  return handleGetApplicationDetails(query, res);
     }
 
-    // Anything else must be an allowed static resource
-    if (isAllowedStaticPath(pathname)) {
+    if (isAllowedStaticPath(pathname))
         return serveStatic(path.join(__dirname, pathname), res);
-    }
+
     return sendError(res, 404, 'Not Found');
 }
 
 
-// ---------------------------------------------------------------------------
-// POST / PUT handlers
-// ---------------------------------------------------------------------------
+// ---------- POST / PUT handlers ----------
 
-// POST /submitapplication
-// Validates the incoming application, adds an applicationId, submission date and an
-// "Unprocessed" status, then stores it in RAM.
+// Adds an id, submission date and "Unprocessed" status, then stores the application
 async function handleSubmitApplication(req, res) {
     let body;
     try {
@@ -254,11 +197,9 @@ async function handleSubmitApplication(req, res) {
         return sendError(res, 400, err.message);
     }
 
-    // The pet and shelter being applied for must really exist
     const pet = body && findPet(body.shelterId, body.petId);
     if (!pet) return sendError(res, 400, 'Unknown petId / shelterId');
 
-    // Only keep the fields we know about (so a client cannot store arbitrary junk)
     const application = {
         applicationId: 'a' + nextApplicationNumber++,
         dateSubmitted: new Date().toISOString(),
@@ -284,7 +225,6 @@ async function handleSubmitApplication(req, res) {
     });
 }
 
-// PUT /applications-update   body: { applicationId: 'a4', status: 'Approved' }
 async function handleUpdateApplication(req, res) {
     let body;
     try {
@@ -293,9 +233,9 @@ async function handleUpdateApplication(req, res) {
         return sendError(res, 400, err.message);
     }
 
-    if (!body || !VALID_STATUSES.includes(body.status)) {
+    if (!body || !VALID_STATUSES.includes(body.status))
         return sendError(res, 400, 'Invalid status');
-    }
+
     const application = findApplication(body.applicationId);
     if (!application) return sendError(res, 404, 'Not Found');
 
@@ -308,13 +248,11 @@ async function handleUpdateApplication(req, res) {
 }
 
 
-// ---------------------------------------------------------------------------
-// Main request handler
-// ---------------------------------------------------------------------------
+// ---------- Main request handler ----------
+
 function handleRequest(req, res) {
     const parsed = url.parse(req.url, true);
 
-    // Decode %20 etc. so the allowed-path checks see the real path
     let pathname;
     try {
         pathname = decodeURIComponent(parsed.pathname);
@@ -331,14 +269,11 @@ function handleRequest(req, res) {
     if (req.method === 'PUT' && pathname === '/applications-update')
         return handleUpdateApplication(req, res);
 
-    // Handle anything else as an error
     return sendError(res, 404, 'Not Found');
 }
 
 
-// ---------------------------------------------------------------------------
-// Start server - but only AFTER all the shelter data has been loaded
-// ---------------------------------------------------------------------------
+// Only start listening once all shelter data has been loaded
 loadShelters()
     .then(loaded => {
         shelters = loaded;
