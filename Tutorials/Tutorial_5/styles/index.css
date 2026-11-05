@@ -1,0 +1,39 @@
+#book-reservation-link {
+    color: white;               /* white text */
+    display: inline-block;        /* allows vertical margins to work */
+    border-radius: 10px;          /* makes corners rounded */
+    background-color: #604020;  /* background color */
+    padding: 8px 15px;            /* vertical and horizontal spacing from border */
+    text-decoration: none;        /* remove default underlining applied to links */
+}
+
+#book-reservation-link:hover {
+    color: #FFFFFF;              /* white text on hover */
+    background-color: #905C2D;   /* darker background on hover */
+}
+
+#restaurant-img {
+    border-radius: 200px;          /* makes corners rounded */
+    border: 10px solid #604020;  /* thick brown border */
+}
+
+.promo {
+    background-color: #F3DEB8;   /* different background color */
+    border: 2px dashed #3E1D0A;  /* dashed border */
+    border-radius: 15px;           /* rounded corners */
+    display: flex;                 /* use flexible side-by-side layout */
+    width: 500px;                  /* use a fixed width for the promo */
+    margin: auto;                  /* center the promo on the page */
+    padding: 15px;                 /* internal padding around the coupon */
+}
+.promo img {
+    width: 120px;
+    height: 120px;
+    border: 2px solid #3E1D0A;
+    border-radius: 10px;
+}
+.promo-text {
+    text-align: left;       /* align text on the left */ 
+    font-weight: bold;      /* make it bold */
+    margin-left: 15px;      /* Move the text to the right a bit */
+}

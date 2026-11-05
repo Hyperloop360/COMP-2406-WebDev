@@ -1,0 +1,67 @@
+
+.menu-category {
+    margin: 30px auto;
+    width: 90%;
+    margin-bottom: 60px;
+}
+.menu-category h2 {
+    text-align: left;
+    border-bottom: 2px solid #805231;
+    padding-bottom: 5px;
+}
+
+
+.menu-category li {   
+    text-align: left;
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+.menu-category img {
+    width: 150px;
+    height: 120px; 
+    border-radius: 8px;  
+}
+
+
+.menu-category li div {
+    display: flex;
+    flex-direction: column; 
+}
+.menu-category li span {
+    color: #3E1D0A;
+    font-size: 16pt;
+}
+.menu-category li span.name {
+    font-weight: bold;
+}.menu-category li span.price {
+    font-style: italic;
+}
+
+
+.drink img {
+    width: 100px;     
+    height: 120px;  
+}
+
+
+.hidden {
+    display: none;
+}
+
+h2:hover {
+    margin-left: 30px;
+    transform: scale(1.1);
+    cursor: pointer;
+    color: rgb(150, 82, 44);
+}
+
+
+.arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+h2.open .arrow {
+  transform: rotate(90deg);
+}
+
