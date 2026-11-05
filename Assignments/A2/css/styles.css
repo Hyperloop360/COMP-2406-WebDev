@@ -1,0 +1,60 @@
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #2c2c2c;
+}
+
+/* Navigation Bar */
+.main-nav {
+    width: 100%;
+    background: #A9724B;
+}
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 0;
+    padding: 10px 0;
+}
+.main-nav li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: background 0.2s ease;
+}
+.main-nav li a:hover {
+    background: #ea6608dd;
+}
+.main-nav a.active {
+    color: #ffea00;
+}
+
+
+/* Banner */
+.banner {
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+.banner-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+/* Footer */
+.site-footer {
+    margin-top: 50px;
+    text-align: center;
+    padding: 20px 0;
+    background: #A9724B;
+    color: white;
+    font-size: 0.95rem;
+}

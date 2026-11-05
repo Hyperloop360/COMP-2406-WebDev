@@ -1,0 +1,12 @@
+{
+  "id": "s4",
+  "name": "Forever Friends Shelter",
+  "city": "Calgary",
+  "processingFee": 50,
+  "pets": [
+    { "id": "p16", "name": "Daisy", "type": "Dog", "breed": "Poodle", "age": 2, "health": "Healthy", "traits": ["Smart", "Active"], "image": "images/dog7.jpg", "views": 0, "adoptionFee": 170, "daysAtShelter": 35 },
+    { "id": "p17", "name": "Leo", "type": "Cat", "breed": "Bengal", "age": 2, "health": "Healthy", "traits": ["Energetic", "Vocal"], "image": "images/cat6.jpg", "views": 0, "adoptionFee": 165, "daysAtShelter": 25 },
+    { "id": "p18", "name": "Porky", "type": "Other", "breed": "Miniature Pot-belly Pig", "age": 3, "health": "Healthy", "traits": ["Intelligent", "Social"], "image": "images/pig1.jpg", "views": 0, "adoptionFee": 250, "daysAtShelter": 90 },
+    { "id": "p19", "name": "Rex", "type": "Dog", "breed": "Doberman", "age": 5, "health": "Healthy", "traits": ["Protective", "Alert"], "image": "images/dog8.jpg", "views": 0, "adoptionFee": 180, "daysAtShelter": 60 }
+  ]
+}

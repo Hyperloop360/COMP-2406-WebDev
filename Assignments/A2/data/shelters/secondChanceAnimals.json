@@ -1,0 +1,14 @@
+{
+  "id": "s3",
+  "name": "Second Chance Animals",
+  "city": "Vancouver",
+  "processingFee": 45,
+  "pets": [
+    { "id": "p10", "name": "Charlie", "type": "Dog", "breed": "Golden Retriever", "age": 2, "health": "Healthy", "traits": ["Friendly", "Loyal"], "image": "images/dog5.jpg", "views": 0, "adoptionFee": 200, "daysAtShelter": 30 },
+    { "id": "p11", "name": "Shadow", "type": "Cat", "breed": "Sphinx", "age": 4, "health": "Healthy", "traits": ["Quiet", "Independent"], "image": "images/cat4.jpg", "views": 0, "adoptionFee": 210, "daysAtShelter": 50 },
+    { "id": "p12", "name": "Spike", "type": "Reptile", "breed": "Green Iguana", "age": 5, "health": "Requires heat lamp", "traits": ["Calm", "Observant"], "image": "images/iguana1.jpg", "views": 0, "adoptionFee": 180, "daysAtShelter": 90 },
+    { "id": "p13", "name": "Buddy", "type": "Dog", "breed": "Cocker Spaniel", "age": 7, "health": "Mild heart murmur", "traits": ["Gentle", "Calm"], "image": "images/dog6.jpg", "views": 0, "adoptionFee": 190, "daysAtShelter": 70 },
+    { "id": "p14", "name": "Mittens", "type": "Cat", "breed": "Ragdoll", "age": 3, "health": "Healthy", "traits": ["Affectionate", "Lazy"], "image": "images/cat5.jpg", "views": 0, "adoptionFee": 200, "daysAtShelter": 40 },
+    { "id": "p15", "name": "Slinky", "type": "Reptile", "breed": "Corn Snake", "age": 4, "health": "Healthy", "traits": ["Docile", "Low maintenance"], "image": "images/snake1.jpg", "views": 0, "adoptionFee": 170, "daysAtShelter": 100 }
+  ]
+}

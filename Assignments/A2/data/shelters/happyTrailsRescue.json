@@ -1,0 +1,12 @@
+{
+  "id": "s1",
+  "name": "Happy Tails Rescue",
+  "city": "Toronto",
+  "processingFee": 40,
+  "pets": [
+    { "id": "p1", "name": "Milo", "type": "Dog", "breed": "Beagle Mix", "age": 3, "health": "Vaccinated, Neutered", "traits": ["Friendly", "Energetic", "Good with kids"], "image": "images/dog1.jpg", "views": 0, "adoptionFee": 180, "daysAtShelter": 45 },
+    { "id": "p2", "name": "Luna", "type": "Cat", "breed": "Siamese", "age": 2, "health": "Vaccinated", "traits": ["Quiet", "Affectionate"], "image": "images/cat1.jpg", "views": 0, "adoptionFee": 160, "daysAtShelter": 30 },
+    { "id": "p3", "name": "Rocky", "type": "Dog", "breed": "German Shepherd", "age": 5, "health": "Hip dysplasia (managed)", "traits": ["Loyal", "Protective", "Trained"], "image": "images/dog2.jpg", "views": 0, "adoptionFee": 190, "daysAtShelter": 60 },
+    { "id": "p4", "name": "Coco", "type": "Parrot", "breed": "African Grey", "age": 8, "health": "Healthy", "traits": ["Talkative", "Intelligent"], "image": "images/parrot1.jpg", "views": 0, "adoptionFee": 200, "daysAtShelter": 120 }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "id": "s2",
+  "name": "Paws & Whiskers Haven",
+  "city": "Ottawa",
+  "processingFee": 35,
+  "pets": [
+    { "id": "p5", "name": "Bella", "type": "Dog", "breed": "Labrador", "age": 4, "health": "Vaccinated, Spayed", "traits": ["Gentle", "Loves water"], "image": "images/dog3.jpg", "views": 0, "adoptionFee": 150, "daysAtShelter": 40 },
+    { "id": "p6", "name": "Simba", "type": "Cat", "breed": "Maine Coon", "age": 3, "health": "Healthy", "traits": ["Fluffy", "Playful"], "image": "images/cat2.jpg", "views": 0, "adoptionFee": 155, "daysAtShelter": 35 },
+    { "id": "p7", "name": "Nibbles", "type": "Other", "breed": "Ferret", "age": 2, "health": "Healthy", "traits": ["Curious", "Fast"], "image": "images/ferret1.jpg", "views": 0, "adoptionFee": 120, "daysAtShelter": 25 },
+    { "id": "p8", "name": "Max", "type": "Dog", "breed": "Boxer", "age": 6, "health": "Allergy to chicken", "traits": ["Energetic", "Goofy"], "image": "images/dog4.jpg", "views": 0, "adoptionFee": 160, "daysAtShelter": 55 },
+    { "id": "p9", "name": "Whiskers", "type": "Cat", "breed": "Domestic Shorthair", "age": 1, "health": "Vaccinated", "traits": ["Curious", "Playful"], "image": "images/cat3.jpg", "views": 0, "adoptionFee": 140, "daysAtShelter": 20 }
+  ]
+}

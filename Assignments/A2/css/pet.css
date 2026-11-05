@@ -1,0 +1,104 @@
+/* Container for the card, centered */
+#petDetailsContainer {
+    display: flex;
+    justify-content: center;
+    margin: 10px 20px;
+}
+.error {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ea6608dd;
+}
+
+/* Pet card */
+.pet-detail-card {
+    width: 360px; 
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding-bottom: 16px;
+}
+.pet-detail-card img.pet-detail-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain; /* show entire image */
+    border-bottom: 2px solid #A9724B;
+    background: #f4f7fb;
+}
+.pet-detail-card h2 {
+    margin: 12px 0 6px 0;
+    font-size: 1.8rem;
+    color: #ea6608dd;
+}
+.pet-detail-card p {
+    margin: 4px 0;
+    font-size: 1rem;
+    color: #333;
+}
+.pet-detail-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 6px 0 6px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+}
+.pet-detail-card ul li {
+    background: #e4e7eb;
+    color: #2c2c2c;
+    font-size: 0.85rem;
+    padding: 8px 8px;
+    border-radius: 12px;
+}
+.pet-detail-card hr {
+    border: none;
+    background-color: #A9724B;
+    border-bottom: 2px solid #A9724B;
+    width: 50%; /* Inset a bit */
+}
+
+
+/* Apply button */
+.apply-button {
+    display: inline-block;
+    margin: 20px 0 0 0;
+    padding: 12px 24px;
+    background: #A9724B;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+.apply-button:hover {
+    background: #ea6608dd;
+    transform: scale(1.03);
+}
+
+
+/* Back to Browsing link */
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #A9724B;
+    padding: 8px 14px;
+    transition: all 0.2s ease;
+}
+.back-link::before {
+    content: "←";
+    font-size: 1.1rem;
+}
+.back-link:hover {
+    color: #ea6608dd;
+}

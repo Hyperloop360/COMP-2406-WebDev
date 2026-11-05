@@ -1,0 +1,123 @@
+/* Main part of page */
+.home-main {
+    padding: 20px;
+    background: #f4f7fb;
+    text-align: center;
+}
+.main-img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 0;
+    display: block;
+    margin: 0 auto;
+}
+.main-text {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 15px 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    line-height: 1.5;
+    color: #2c2c2c;
+    text-align: left;
+}
+.main-text h2 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 12px;
+    color: #ea6608dd;
+}
+.main-text p {
+    margin: 0 0 12px 0;
+}
+
+
+/* How Adoption Works */
+.home-steps {
+    padding: 20px;
+    padding-top: 0px;
+    text-align: center;
+}
+.home-steps h2 {
+    color: #ea6608dd;
+    margin-bottom: 20px;
+}
+.steps-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+.step-card {
+    background: #ffffff;
+    padding: 18px;
+    border-radius: 12px;
+    width: 180px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+.step-card h3 {
+    margin: 0 0 8px 0;
+    color: #A9724B;
+}
+.step-card p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #2c2c2c;
+    line-height: 1.4;
+}
+
+
+/* Why Adopt From New Home? */
+.home-why {
+    padding: 20px;
+    text-align: center;
+}
+.home-why h2 {
+    color: #ea6608dd;
+    margin-bottom: 12px;
+}
+.home-why ul {
+    list-style: none;       /* no bullets */
+    padding: 0;
+    margin: 0 auto;         /* center the whole list */
+    display: inline-block;  /* shrink-wrap the list width */
+    text-align: left;       /* so items inside are left-aligned */
+}
+.home-why li {
+    margin-bottom: 8px;
+    font-size: 1rem;
+    display: flex;          /* allow checkmark and text alignment */
+    align-items: flex-start; 
+    gap: 8px;               /* space between checkmark and text */
+}
+
+
+/* Call to Action */
+.home-cta {
+    padding: 20px;
+    padding-top: 0px;
+    text-align: center;
+}
+.home-cta h2 {
+    color: #ea6608dd;
+    margin-bottom: 8px;
+}
+.home-cta p {
+    margin: 0 0 12px;
+    font-size: 1rem;
+}
+.home-cta a.cta-button {
+    display: inline-block;
+    padding: 12px 24px;
+    background: #A9724B;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+.home-cta a.cta-button:hover {
+    background: #ea6608dd;
+    transform: scale(1.03);
+}

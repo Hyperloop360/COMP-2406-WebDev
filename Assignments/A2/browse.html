@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>New Home - Browse</title>
+        <link rel="stylesheet" href="/css/styles.css" />
+        <link rel="stylesheet" href="/css/browse.css" />
+    </head>
+    <body>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/browse" class="active">Browse Pets</a></li>
+                <li><a href="/applications">View Applications</a></li>
+                <li><a href="/about">About Us</a></li>
+            </ul>
+        </nav>
+
+        <header class="banner">
+            <img src="/images/banner.jpg" alt="New Home Animal Rescue Banner" class="banner-img">
+        </header>
+
+        <section class="shelter-select">
+            <h2>Select a Shelter</h2>
+            <select id="shelterDropdown">
+                <option value="">-- No Shelter Selected --</option>
+            </select>
+            <p id="message" class="message"></p> <!-- fetch errors are shown here -->
+        </section>
+
+        <!-- Pet Type Buttons = hidden by default -->
+        <section id="petTypeBar" class="pet-type-bar hidden">
+            <button data-type="All">All</button>
+            <button data-type="Cat">Cats</button>
+            <button data-type="Dog">Dogs</button>
+            <button data-type="Bird">Birds</button>
+            <button data-type="Reptile">Reptiles</button>
+            <button data-type="Other">Other</button>
+        </section>
+
+        <section id="petContainer" class="pet-grid">
+            <!-- JS creates grid of pet cards here -->
+        </section>
+
+        <footer class="site-footer">
+            <p>© 2026 New Home Animal Rescue | Adopt your new best friend</p>
+        </footer>
+
+        <script src="/js/browse.js" defer></script>
+    </body>
+</html>

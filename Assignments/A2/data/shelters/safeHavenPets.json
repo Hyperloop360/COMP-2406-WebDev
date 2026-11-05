@@ -1,0 +1,13 @@
+{
+  "id": "s5",
+  "name": "Safe Haven Pets",
+  "city": "Montreal",
+  "processingFee": 25,
+  "pets": [
+    { "id": "p20", "name": "Oliver", "type": "Cat", "breed": "Sphynx", "age": 12, "health": "Healthy", "traits": ["Quiet", "Sweet"], "image": "images/cat7.jpg", "views": 0, "adoptionFee": 160, "daysAtShelter": 180 },
+    { "id": "p21", "name": "Bailey", "type": "Dog", "breed": "Husky", "age": 3, "health": "Healthy", "traits": ["Energetic", "Vocal"], "image": "images/dog9.jpg", "views": 0, "adoptionFee": 160, "daysAtShelter": 40 },
+    { "id": "p22", "name": "Lemon & Lime", "type": "Bird", "breed": "Budgies", "age": 2, "health": "Healthy", "traits": ["Friendly", "Sings"], "image": "images/budgie1.jpg", "views": 0, "adoptionFee": 120, "daysAtShelter": 30 },
+    { "id": "p23", "name": "Gizmo", "type": "Reptile", "breed": "Chameleon", "age": 1, "health": "Requires humidity control", "traits": ["Calm", "Color-changing"], "image": "images/chameleon1.jpg", "views": 0, "adoptionFee": 180, "daysAtShelter": 50 },
+    { "id": "p24", "name": "Toby", "type": "Dog", "breed": "Shih Tzu", "age": 6, "health": "Dental issues (treated)", "traits": ["Calm", "Loves laps"], "image": "images/dog10.jpg", "views": 0, "adoptionFee": 160, "daysAtShelter": 65 }
+  ]
+}

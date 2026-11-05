@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>New Home - Applications</title>
+        <link rel="stylesheet" href="/css/styles.css" />
+        <link rel="stylesheet" href="/css/applications.css" />
+    </head>
+    <body>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/browse">Browse Pets</a></li>
+                <li><a href="/applications" class="active">View Applications</a></li>
+                <li><a href="/about">About Us</a></li>
+            </ul>
+        </nav>
+
+        <header class="banner">
+            <img src="/images/banner.jpg" alt="New Home Animal Rescue Banner" class="banner-img">
+        </header>
+
+        <section class="applications-section">
+            <h2>Submitted Applications</h2>
+            <p id="message" class="message"></p> <!-- load / update errors are shown here -->
+
+            <div class="table-wrapper">
+                <table id="applicationsTable">
+                    <thead>
+                        <tr>
+                            <th>Date Submitted</th>
+                            <th>Application ID</th>
+                            <th>Shelter ID</th>
+                            <th>Pet ID</th>
+                            <th>Pet Type</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="applicationsBody">
+                        <!-- JS creates one row per application here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Filled in by JS when a View button is toggled on -->
+        <section id="applicationDetails" class="application-details" hidden></section>
+
+        <footer class="site-footer">
+            <p>© 2026 New Home Animal Rescue | Adopt your new best friend</p>
+        </footer>
+
+        <script src="/js/applications.js"></script>
+    </body>
+</html>
