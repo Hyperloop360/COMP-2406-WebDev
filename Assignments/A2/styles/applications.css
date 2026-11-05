@@ -1,0 +1,31 @@
+/* Paws & Claws - extra styles for the View Applications page (uses the variables from style.css) */
+
+/* Table of applications */
+#tableWrapper { overflow-x: auto; background: white; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
+#applicationsTable { width: 100%; border-collapse: collapse; border-spacing: 0; }
+#applicationsTable th { background: var(--main); color: white; padding: 12px 10px; text-align: left; }
+#applicationsTable td { padding: 10px; border-bottom: 1px solid #e0e6e6; text-align: left; vertical-align: middle; }
+#applicationsTable .empty-row { text-align: center; color: #666; padding: 24px; }
+
+/* View buttons: same colour scheme as the navigation links (teal, orange when selected) */
+.view-button { margin-left: 10px; padding: 3px 12px; font-size: 0.9rem; }
+.view-button.active { background: var(--accent); font-weight: bold; }
+.view-button.active:hover:not(:disabled) { background: var(--accent); }
+
+/* Status colours: used by the drop-downs and by the status badge in the details */
+.status-select { font-weight: bold; border-width: 2px; border-radius: 20px; padding: 6px 12px; cursor: pointer; }
+.status-unprocessed { background: #e4e7eb; border-color: #8a929c; color: #2c2c2c; }
+.status-pending     { background: #fff3bf; border-color: #e0a800; color: #6b4e00; }
+.status-rejected    { background: #fcd5d5; border-color: #d64545; color: #8a1c1c; }
+.status-approved    { background: #d3f2d9; border-color: #2e9e4a; color: #1b5e2e; }
+.status-badge { display: inline-block; padding: 1px 10px; border: 2px solid; border-radius: 12px; font-weight: bold; }
+
+/* Details area below the table */
+#applicationDetails { margin-top: 20px; }
+.details-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 15px; text-align: left; margin-top: 10px; }
+.details-card { margin: 0; }
+.details-card h3 { margin-top: 0; padding-bottom: 6px; border-bottom: 2px solid var(--main); }
+.details-card p { margin: 6px 0; overflow-wrap: anywhere; }
+.details-pet-image { display: block; width: 140px; height: 140px; object-fit: cover; border-radius: 50%; margin: 6px auto 12px; }
+.error-message { color: #b00020; font-weight: bold; }
+.details-message { margin-top: 16px; }

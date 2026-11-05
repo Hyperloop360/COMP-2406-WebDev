@@ -1,52 +1,38 @@
-// Application form page. The pet's details arrive as query parameters from the pet page;
-// on submit, the application is POSTed to the server as JSON.
+// Fills the pet info from the query string and submits the application to the server
+const q = new URLSearchParams(window.location.search);
+const petId = q.get("petId");
+const shelterId = q.get("shelterId");
+const petName = q.get("name");
+const adoptionFee = Number(q.get("adoptionFee"));
+const processingFee = Number(q.get("processingFee"));
 
-const params = new URLSearchParams(window.location.search);
-const petId = params.get("petId");
-const shelterId = params.get("shelterId");
-const petName = params.get("petName");
-const petType = params.get("petType");
-const petBreed = params.get("petBreed");
-const adoptionFee = params.get("adoptionFee");
-const processingFee = params.get("processingFee");
+// Show the pet's info at the top of the form (textContent so URL text is never treated as HTML)
+const petInfo = document.getElementById("petInfo");
+function addLine(tag, text) {
+    const el = document.createElement(tag);
+    el.textContent = text;
+    petInfo.appendChild(el);
+    return el;
+}
+addLine("h1", `Application for ${petName}`);
+addLine("p", `${q.get("breed")} (${q.get("type")})`);
+addLine("p", `Adoption Fee: $${adoptionFee}`);
+addLine("p", `Processing Fee: $${processingFee}`);
+addLine("p", `Total: $${adoptionFee + processingFee}`).style.fontWeight = "bold";
 
-const petInfoSection = document.getElementById("petApplicationInfo");
+const form = document.getElementById("applyForm");
+const careBox = document.getElementById("careAgg");
+const guarBox = document.getElementById("guarAgg");
 const submitBtn = document.getElementById("submitBtn");
 const submitError = document.getElementById("submitError");
-const agreement1 = document.getElementById("agreement1");
-const agreement2 = document.getElementById("agreement2");
-const form = document.getElementById("adoptionForm");
 
-
-// Insert the chosen pet's information at the top of the form.
-// (textContent is used so that text coming from the URL can never be treated as HTML)
-if (petId && shelterId && petName && petType && petBreed && adoptionFee && processingFee) {
-    const total = parseInt(adoptionFee) + parseInt(processingFee);
-
-    const heading = document.createElement("h2");
-    heading.textContent = `Applying to Adopt: ${petName}`;
-    const typeLine = document.createElement("p");
-    typeLine.textContent = `Type: ${petType} | Breed: ${petBreed}`;
-    const feeLine = document.createElement("p");
-    feeLine.textContent =
-        `Adoption Fee: $${adoptionFee} + Processing Fee: $${processingFee} = Total (before taxes): $${total}`;
-
-    petInfoSection.append(heading, typeLine, feeLine);
-} else {
-    // Handle case where pet information is missing
-    petInfoSection.innerHTML = "<p class=\"error\">Incomplete Pet information.</p>";
-    submitBtn.disabled = true;
+// Submit is only enabled when both checkboxes are ticked (and we know which pet this is for)
+function updateSubmit() {
+    submitBtn.disabled = !(petId && shelterId && careBox.checked && guarBox.checked);
 }
-
-// Enable Submit button only when both checkboxes are checked (and the pet info is complete)
-function updateSubmitState() {
-    const petInfoComplete = petInfoSection.querySelector(".error") === null;
-    submitBtn.disabled = !(petInfoComplete && agreement1.checked && agreement2.checked);
-}
-agreement1.addEventListener("change", updateSubmitState);
-agreement2.addEventListener("change", updateSubmitState);
-updateSubmitState();
-
+careBox.addEventListener("change", updateSubmit);
+guarBox.addEventListener("change", updateSubmit);
+updateSubmit();
 
 // Gather everything entered in the form into one object to send to the server
 function buildApplication() {
@@ -57,27 +43,35 @@ function buildApplication() {
         email: document.getElementById("email").value,
         phone: document.getElementById("phone").value,
         address: document.getElementById("address").value,
-        residents: document.getElementById("residents").value,
-        currentPets: document.getElementById("currentPets").value,
-        experience: document.getElementById("experience").value,
-        location: document.getElementById("location").value,
-        donation: document.getElementById("donation").value
+        residents: document.getElementById("resNum").value,
+        currentPets: document.getElementById("ownedPets").value,
+        experience: document.getElementById("pastExp").value,
+        location: document.getElementById("liveArea").value,
+        donation: document.getElementById("support").value
     };
 }
 
 // Replace the form with the thank-you message
 function showThankYou() {
-    form.innerHTML = `
-        <h2>Application Submitted Successfully!</h2>
-        <p>Thank you for applying to adopt a pet. Our team will review your application and contact you soon.</p>
-        <a href="/" class="return-home-button">Return to Home</a>`;
+    const thanks = document.getElementById("thanks");
+    thanks.className = "card";
+    thanks.innerHTML = `<h1>Application Submitted!</h1>
+        <p></p>
+        <button type="button" id="homeBtn" class="primary">Return to Home</button>`;
+    thanks.querySelector("p").textContent =
+        `Thank you for applying to adopt ${petName}. Your application will be reviewed and we will contact you soon.`;
+    thanks.hidden = false;
+    form.remove();
+    document.getElementById("homeBtn").addEventListener("click", () => {
+        window.location.href = "/";
+    });
 }
 
-// Handle form submission: send it to the server, and only thank the user once the server accepts it
-form.addEventListener("submit", (e) => {
-    e.preventDefault();
+// POST the application to the server; only thank the user once the server has accepted it
+submitBtn.addEventListener("click", () => {
+    if (!form.reportValidity()) return; // check required fields first
     submitError.textContent = "";
-    submitBtn.disabled = true;     // prevent double submissions while waiting
+    submitBtn.disabled = true;          // prevent double submissions while waiting
 
     fetch("/submitapplication", {
         method: "POST",
@@ -91,6 +85,6 @@ form.addEventListener("submit", (e) => {
         .then(() => showThankYou())
         .catch(() => {
             submitError.textContent = "Sorry, your application could not be submitted. Please try again.";
-            updateSubmitState();
+            updateSubmit();
         });
 });

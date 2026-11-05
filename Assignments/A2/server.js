@@ -4,7 +4,7 @@
  * A plain node.js HTTP server (no external modules) that:
  *   - loads every shelter .json file from data/shelters/ BEFORE it starts listening
  *   - serves the site's HTML pages from clean URLs ("/", "/browse", ...)
- *   - serves static resources (css, js, images, aboutData.js)
+ *   - serves static resources (styles, js, images)
  *   - provides JSON endpoints for shelters, pets and adoption applications
  *   - stores all submitted applications in RAM (lost when the server restarts)
  */
@@ -42,10 +42,9 @@ const PAGE_ROUTES = {
     '/about':        'about.html'
 };
 
-// Static files may ONLY come from these folders / files. This keeps server.js and the
+// Static files may ONLY come from these folders. This keeps server.js and the
 // raw shelter .json files from being downloaded as "static" files.
-const STATIC_PREFIXES = ['/css/', '/js/', '/images/'];
-const STATIC_FILES = ['/data/aboutData.js'];
+const STATIC_PREFIXES = ['/styles/', '/js/', '/images/'];
 
 
 // ---------------------------------------------------------------------------
@@ -94,8 +93,7 @@ function serveStatic(filePath, res) {
 // Is this URL path one of the static resources we are willing to serve?
 function isAllowedStaticPath(pathname) {
     if (pathname.includes('..')) return false;     // no directory-traversal tricks
-    return STATIC_FILES.includes(pathname) ||
-           STATIC_PREFIXES.some(prefix => pathname.startsWith(prefix));
+    return STATIC_PREFIXES.some(prefix => pathname.startsWith(prefix));
 }
 
 // Collect the body of a POST/PUT request and parse it as JSON.

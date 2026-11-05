@@ -1,22 +1,14 @@
-// Insert the mission statement text from the pre-loaded aboutData.js "mission" value
-document.getElementById("mission-text").textContent = aboutData.mission;
+// Fills about.html from the aboutData object (aboutData.js)
+document.getElementById("mission").textContent = aboutData.mission;
+document.getElementById("teamDescription").textContent = aboutData.teamDescription;
 
-// Insert the team description text from the "teamDescription" value
-document.getElementById("team-description").textContent = aboutData.teamDescription;
-
-// Go through the "team" members and create a div with the appropraiet info per team member
-const grid = document.getElementById("team-grid");
-
+const teamSection = document.getElementById("team");
 aboutData.team.forEach(member => {
     const card = document.createElement("div");
-    card.className = "team-card";
-
-    card.innerHTML = `
-        <h3>${member.name}</h3>
+    card.className = "card";
+    card.innerHTML = `<h3>${member.name}</h3>
         <p><strong>Role:</strong> ${member.role}</p>
         <p><strong>Experience:</strong> ${member.experience}</p>
-        <p><strong>Qualifications:</strong> ${member.qualifications}</p>
-    `;
-
-    grid.appendChild(card);
+        <p><strong>Qualifications:</strong> ${member.qualifications}</p>`;
+    teamSection.appendChild(card);
 });

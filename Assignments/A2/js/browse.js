@@ -1,27 +1,23 @@
-// Browse page: pick a shelter, then show (and filter) its pets.
-// All data comes from the server via fetch().
-
-const shelterDropdown = document.getElementById("shelterDropdown");
-const petContainer = document.getElementById("petContainer");
-const petTypeBar = document.getElementById("petTypeBar");
+// Populates browse.html using data requested from the server with fetch()
+const shelterSelect = document.getElementById("location");
+const typeButtons = document.getElementById("typeButtons");
+const petsSection = document.getElementById("pets");
 const messageBox = document.getElementById("message");
+const buttons = typeButtons.querySelectorAll("button");
 
-// A shelter id passed in when returning from the pet details page (e.g., /browse?shelterId=s2)
-const savedShelterId = new URLSearchParams(window.location.search).get("shelterId");
+// The shelter whose full data (including pets) was last received from the server
+let currentShelter = null;
 
-// State for the currently selected shelter (its pets are replaced every time we load a shelter)
-let currentPets = [];
-let activeType = "All";
-
-// The pet-type buttons only know these categories. Anything else (e.g., "Parrot") is
-// grouped into one of them so that every pet can be found with a type button.
-function getPetCategory(type) {
-    if (["Cat", "Dog", "Bird", "Reptile"].includes(type)) return type;
-    if (type === "Parrot") return "Bird";
+// Maps a pet's type to one of the button categories
+function getCategory(type) {
+    if (type === "Cat") return "Cats";
+    if (type === "Dog") return "Dogs";
+    if (type === "Bird" || type === "Parrot") return "Birds";
+    if (type === "Reptile") return "Reptiles";
     return "Other";
 }
 
-// Show (or clear, with "") an error/info message under the drop-down
+// Show (or clear, with "") an error message under the drop-down
 function showMessage(text) {
     messageBox.textContent = text;
 }
@@ -32,144 +28,88 @@ function checkResponse(response) {
     return response.json();
 }
 
+// Request the basic shelter list (no pets) and fill the drop-down; none is selected initially
+function populateShelters() {
+    shelterSelect.add(new Option("-- Select a shelter --", ""));
 
-// ---------- Fetching from the server ----------
-
-// Request the basic list of shelters (no pets) and fill the drop-down menu
-function loadShelterList() {
     fetch("/shelters")
         .then(checkResponse)
-        .then(shelters => {
-            shelters.forEach(shelter => {
-                const option = document.createElement("option");
-                option.value = shelter.id;
-                option.textContent = shelter.name;
-                shelterDropdown.appendChild(option);
-            });
+        .then(shelterList => {
+            shelterList.forEach(s => shelterSelect.add(new Option(`${s.name} - ${s.city}`, s.id)));
 
-            // If we came back from a pet's page, re-select that shelter and load its pets
-            if (savedShelterId && shelters.some(s => s.id === savedShelterId)) {
-                shelterDropdown.value = savedShelterId;
-                loadShelter(savedShelterId);
+            // Returning from pet.html: preselect the shelter given in the query string
+            const returnShelter = new URLSearchParams(window.location.search).get("shelterId");
+            if (returnShelter && shelterList.some(s => s.id === returnShelter)) {
+                shelterSelect.value = returnShelter;
+                loadShelter(returnShelter);
             }
         })
         .catch(() => showMessage("Sorry, the list of shelters could not be loaded."));
 }
 
-// Request ONE shelter's full data (including pets) and display it
+// Hide the buttons and pets (no shelter selected)
+function clearShelter() {
+    currentShelter = null;
+    typeButtons.hidden = true;
+    petsSection.innerHTML = "";
+}
+
+// Request ONE shelter's full data (with pets) from the server, replacing the previous shelter's data
 function loadShelter(shelterId) {
     showMessage("");
     fetch(`/shelters?id=${encodeURIComponent(shelterId)}`)
         .then(checkResponse)
         .then(shelter => {
-            // Ignore this response if the user has already picked a different shelter
-            if (shelterDropdown.value !== shelterId) return;
-
-            // Overwrite whatever shelter data we had before
-            currentPets = shelter.pets;
-            activeType = "All";
-            renderPets(currentPets);
-            updatePetTypeButtons(currentPets);
+            // Ignore a late response if the user has already chosen a different shelter
+            if (shelterSelect.value !== shelterId) return;
+            showShelter(shelter);
         })
         .catch(() => {
-            if (shelterDropdown.value !== shelterId) return;
-            resetPage();
+            if (shelterSelect.value !== shelterId) return;
+            clearShelter();
             showMessage("Sorry, that shelter's pets could not be loaded.");
         });
 }
 
-
-// ---------- Rendering ----------
-
-// Clear the pets and hide the type bar (nothing selected)
-function resetPage() {
-    currentPets = [];
-    petContainer.innerHTML = "";
-    petTypeBar.classList.add("hidden");
-    petTypeBar.querySelectorAll("button").forEach(btn => btn.classList.remove("active"));
-}
-
-// Return a histogram object of { pet category : count }
-function getPetTypes(pets) {
-    const types = { Cat: 0, Dog: 0, Bird: 0, Reptile: 0, Other: 0 };
-    pets.forEach(p => {
-        types[getPetCategory(p.type)]++;
+// Show buttons/pets for the shelter data received from the server
+function showShelter(shelter) {
+    currentShelter = shelter;
+    typeButtons.hidden = false;
+    // Disable buttons for which the shelter has no pets ("All" is always enabled)
+    buttons.forEach(b => {
+        const cat = b.dataset.category;
+        b.disabled = cat !== "All" && !currentShelter.pets.some(p => getCategory(p.type) === cat);
     });
-    return types;
+    selectCategory("All");
 }
 
-// Render the pets on the page, grouped as little cards
-function renderPets(pets) {
-    petContainer.innerHTML = "";
-    pets.forEach(p => {
-        const card = document.createElement("div");
-        card.className = "pet-card";
-        card.innerHTML = `
-            <img src="${p.image}" alt="${p.name}">
-            <h3>${p.name}</h3>
-            <button>View Details</button>`;
-
-        // Clicking View Details requests the pet's details page from the server
-        card.querySelector("button").addEventListener("click", () => {
-            window.location.href =
-                `/details?petId=${encodeURIComponent(p.id)}&shelterId=${encodeURIComponent(shelterDropdown.value)}`;
+// Mark one button selected and display the matching pets
+function selectCategory(category) {
+    buttons.forEach(b => b.classList.toggle("selected", b.dataset.category === category));
+    petsSection.innerHTML = "";
+    currentShelter.pets
+        .filter(p => category === "All" || getCategory(p.type) === category)
+        .forEach(pet => {
+            const card = document.createElement("div");
+            card.className = "petCard";
+            card.innerHTML = `<img src="${pet.image}" alt="${pet.name}"><h3>${pet.name}</h3>`;
+            const btn = document.createElement("button");
+            btn.textContent = "View Details";
+            btn.addEventListener("click", () => {
+                window.location.href =
+                    `/details?petId=${encodeURIComponent(pet.id)}&shelterId=${encodeURIComponent(currentShelter.id)}`;
+            });
+            card.appendChild(btn);
+            petsSection.appendChild(card);
         });
-
-        petContainer.appendChild(card);
-    });
 }
 
-// Update the set of pet type buttons for the given pets
-function updatePetTypeButtons(pets) {
-    const counts = getPetTypes(pets);
-
-    petTypeBar.querySelectorAll("button").forEach(btn => {
-        const type = btn.dataset.type;
-        btn.classList.remove("active");
-
-        // "All" is always enabled and selected by default; others are disabled if no pets match
-        if (type === "All") {
-            btn.classList.add("active");
-            btn.classList.remove("disabled");
-        } else {
-            btn.classList.toggle("disabled", counts[type] === 0);
-        }
-    });
-    petTypeBar.classList.remove("hidden");
-}
-
-
-// ---------- Event handlers ----------
-
-// Handle shelter selection
-shelterDropdown.addEventListener("change", () => {
-    const shelterId = shelterDropdown.value;
+populateShelters();
+shelterSelect.addEventListener("change", () => {
     showMessage("");
-
-    if (!shelterId) {
-        resetPage();
-        return;
-    }
-    loadShelter(shelterId);
+    if (shelterSelect.value) loadShelter(shelterSelect.value);
+    else clearShelter();
 });
-
-// Handle pet type button selection
-petTypeBar.addEventListener("click", e => {
-    // Ignore clicks that are not on an enabled button
-    if (e.target.tagName !== "BUTTON" || e.target.classList.contains("disabled"))
-        return;
-
-    activeType = e.target.dataset.type;
-
-    // Highlight the active button, and unhighlight the others
-    petTypeBar.querySelectorAll("button").forEach(btn => btn.classList.remove("active"));
-    e.target.classList.add("active");
-
-    // Show only the pets of the chosen type
-    const filtered = currentPets.filter(p =>
-        activeType === "All" || getPetCategory(p.type) === activeType);
-    renderPets(filtered);
-});
-
-// Start by loading the shelter list (this also restores a previously selected shelter)
-loadShelterList();
+buttons.forEach(b => b.addEventListener("click", () => {
+    if (!b.disabled) selectCategory(b.dataset.category);
+}));

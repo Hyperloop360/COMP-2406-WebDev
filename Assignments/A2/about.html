@@ -1,46 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <title>New Home - About</title>
-        <link rel="stylesheet" href="/css/styles.css" />
-        <link rel="stylesheet" href="/css/about.css" />
-    </head>
-    <body>
-        <nav class="main-nav">
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/browse">Browse Pets</a></li>
-                <li><a href="/applications">View Applications</a></li>
-                <li><a href="/about" class="active">About Us</a></li>
-            </ul>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Paws & Claws - About</title>
+    <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <img src="/images/banner.jpg" alt="center name banner">
+        <!-- Navigation links-->
+        <nav>
+            <a href="/">Home</a>
+            <a href="/browse">Browse Pets</a>
+            <a href="/applications">View Applications</a>
+            <a href="/about" class="active">About Us</a>
         </nav>
-
-        <header class="banner">
-            <img src="/images/banner.jpg" alt="New Home Animal Rescue Banner" class="banner-img">
-        </header>
-
-        <section class="about-mission">
-            <h2>Our Mission</h2>
-            <p id="mission-text"></p>   <!-- This will get filled in dynamically -->
-        </section>
-
-        <section class="about-team">
-            <img src="/images/aboutUs.jpg" alt="About New Home Animal Rescue" id="team-img">
-  
-            <h2>Our Team</h2>
-            <p id="team-description"></p>  <!-- This will get filled in dynamically -->
-   
-            <div class="team-grid" id="team-grid">
-                <!-- The team cards will get filled in dynamically -->
-            </div>
-        </section>
-
-        <footer class="site-footer">
-            <p>© 2026 New Home Animal Rescue | Adopt your new best friend</p>
-        </footer>
-
-        <script src="/data/aboutData.js"></script> <!-- Make sure data is loaded before JavaScript -->
-        <script src="/js/about.js"></script>
-    </body>
+    </header>
+    <main>
+        <h1>Our Mission</h1>
+        <p id="mission"></p>
+        <img class="wide" src="/images/whyAdopt.jpg" alt="Happy adopted pets">
+        <h1>Our Team</h1>
+        <h2 id="teamDescription"></h2>
+        <section id="team"></section>
+    </main>
+    <footer>
+        <hr>
+        <p>&copy; 2026 Paws &amp; Claws | Open Your Heart, Change a Life</p>
+    </footer>
+    <script src="/js/aboutData.js"></script>
+    <script src="/js/about.js"></script>
+</body>
 </html>

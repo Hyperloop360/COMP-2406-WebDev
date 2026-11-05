@@ -191,7 +191,7 @@ async function toggleDetails(app) {
 
 // Build a card with a heading and a list of "Label: value" lines
 function makeCard(title, fields, extraClass) {
-    const card = makeElement("div", undefined, "details-card " + (extraClass || ""));
+    const card = makeElement("div", undefined, "card details-card " + (extraClass || ""));
     card.appendChild(makeElement("h3", title));
     fields.forEach(([label, value]) => {
         const line = document.createElement("p");

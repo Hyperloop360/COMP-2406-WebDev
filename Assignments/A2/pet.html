@@ -1,32 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>New Home - Pet Details</title>
-        <link rel="stylesheet" href="/css/styles.css">
-        <link rel="stylesheet" href="/css/pet.css">
-    </head>
-    <body>
-        <nav class="main-nav">
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/browse" class="active">Browse Pets</a></li>
-                <li><a href="/applications">View Applications</a></li>
-                <li><a href="/about">About Us</a></li>
-            </ul>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Paws & Claws - Pet Details</title>
+    <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <img src="/images/banner.jpg" alt="center name banner">
+        <!-- Navigation links-->
+        <nav>
+            <a href="/">Home</a>
+            <a href="/browse" class="active">Browse Pets</a>
+            <a href="/applications">View Applications</a>
+            <a href="/about">About Us</a>
         </nav>
-
-        <header class="banner">
-            <img src="/images/banner.jpg" alt="New Home Animal Rescue Banner" class="banner-img">
-        </header>
-
-        <section id="petDetailsContainer"></section> <!-- JS writes pet details here -->
-        <a id="back-button"></a> <!-- JS writes pet details here -->
-
-        <footer class="site-footer">
-            <p>© 2026 New Home Animal Rescue | Adopt your new best friend</p>
-        </footer>
-
-        <script src="/js/pet.js" defer></script>
-    </body>
+    </header>
+    <main>
+        <div id="petDetails"></div>
+    </main>
+    <footer>
+        <hr>
+        <p>&copy; 2026 Paws &amp; Claws | Open Your Heart, Change a Life</p>
+    </footer>
+    <script src="/js/pet.js"></script>
+</body>
 </html>
